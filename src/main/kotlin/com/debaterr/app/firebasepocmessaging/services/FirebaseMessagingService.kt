@@ -30,7 +30,6 @@ class FirebaseMessagingService(
     open fun sendToTopics(request: NotificationRequest): NotificationResponse {
         return try {
             val topics = request.topics;
-            val token = request.token;
             logger.info("sending notification to topics {}", topics!!.joinToString(","));
             val message =  buildMessageHelper(request).setCondition(buildCondition(topics)).build();
             logger.info("sending following message {} ", message);
@@ -45,7 +44,7 @@ class FirebaseMessagingService(
     open fun subscribeToTopic(token: String, topics: List<String>): Boolean {
         return try {
             topics.forEach { topic ->
-                firebaseMessaging.subscribeToTopic(listOf(topic), topic)
+                firebaseMessaging.subscribeToTopic(listOf(token), topic)
                 logger.info("Token {} is Subscribed to the topic {} ", token,  topic)
             }
             true

@@ -11,6 +11,15 @@ data class NotificationRequest (
     val data: Map<String, String> = emptyMap<String, String>()
 )
 
+data class SubscriptionRequest(
+    val topics: List<String> = emptyList<String>(),
+    val token: String
+)
+data class UnSubscriptionRequest(
+    val topics: List<String> = emptyList<String>(),
+    val token: String
+)
+
 data class NotificationResponse(
     val success: Boolean,
     val message: String? = null,
